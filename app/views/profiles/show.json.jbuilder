@@ -1,0 +1,1 @@
+json.extract! @profile, :id, :first_name, :last_name, :qualification, :years_experience, :hourly_rate, :picture, :bio, :street, :suburb, :state, :postcode, :country, :user_id, :created_at, :updated_at
