@@ -14,6 +14,7 @@ gem 'carrierwave'
 gem 'cloudinary'
 gem 'bootstrap'
 gem 'country_select'
+gem 'tzinfo-data'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

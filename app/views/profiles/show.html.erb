@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
-  <p>Is tutor? <%= @profile.user.has_role? :tutor %></p>
-<p>
-  <strong>First name:</strong>
-  <%= @profile.first_name %>
-</p>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card card-block">
+      <h4 class="card-title">
+  <%= @profile.first_name %></h4>
 
 <p>
   <strong>Last name:</strong>
