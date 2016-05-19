@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @year_level.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @year_level.description %>
+</p>
+
+<%= link_to 'Edit', edit_year_level_path(@year_level) %> |
+<%= link_to 'Back', year_levels_path %>

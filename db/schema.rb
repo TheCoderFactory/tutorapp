@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517104645) do
+ActiveRecord::Schema.define(version: 20160519082459) do
+
+  create_table "profile_subjects", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "profile_subjects", ["profile_id"], name: "index_profile_subjects_on_profile_id"
+  add_index "profile_subjects", ["subject_id"], name: "index_profile_subjects_on_subject_id"
+
+  create_table "profile_year_levels", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "year_level_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "profile_year_levels", ["profile_id"], name: "index_profile_year_levels_on_profile_id"
+  add_index "profile_year_levels", ["year_level_id"], name: "index_profile_year_levels_on_year_level_id"
 
   create_table "profiles", force: :cascade do |t|
     t.string   "first_name"
@@ -44,6 +64,13 @@ ActiveRecord::Schema.define(version: 20160517104645) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
 
+  create_table "subjects", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -68,5 +95,12 @@ ActiveRecord::Schema.define(version: 20160517104645) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+
+  create_table "year_levels", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
 end

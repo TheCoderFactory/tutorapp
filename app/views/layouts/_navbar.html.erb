@@ -2,7 +2,14 @@
   <div class="container">
     <a class="navbar-brand" href="/">Project name</a>
     <ul class="nav navbar-nav pull-md-right">
-      <li class="nav-item"><a href="/profiles/new" class="nav-link btn btn-secondary-outline">Be a tutor</a></li>
+      <% if user_signed_in? %>
+        <% if current_user.has_role? :tutor and current_user.profile %>
+          <li class="nav-item"><%= link_to 'My Profile', profile_path(current_user.profile), class: 'nav-link' %></li>
+        <% else %>
+          <li class="nav-item"><a href="/profiles/new" class="nav-link btn btn-secondary-outline">Be a tutor</a></li>
+        <% end %>
+        <li class="nav-item"><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
+      <% end %>
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
