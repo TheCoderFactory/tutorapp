@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   resources :year_levels
-  resources :subjects
+  resources :subjects do
+    member do
+      post :add
+      delete :remove
+    end
+  end
   resources :profiles
+  post 'search', to: 'profiles#search'
   devise_for :users
   get 'home/index'
 

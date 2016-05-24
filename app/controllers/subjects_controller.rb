@@ -1,6 +1,15 @@
 class SubjectsController < ApplicationController
-  before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :set_subject, only: [:show, :edit, :update, :destroy, :add, :remove]
 
+  def add
+    current_user.profile.subjects << @subject
+    redirect_to :back
+  end
+
+  def remove
+    current_user.profile.subjects.delete(@subject)
+    redirect_to :back
+  end
   # GET /subjects
   # GET /subjects.json
   def index

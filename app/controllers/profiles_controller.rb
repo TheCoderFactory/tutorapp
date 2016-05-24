@@ -5,12 +5,18 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    if params[:search]
+      @subject = Subject.where(name: params[:search])
+      @profiles = @subject.profiles
+    else
+      @profiles = Profile.all
+    end
   end
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @subjects = Subject.order(:name)
   end
 
   # GET /profiles/new
