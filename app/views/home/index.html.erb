@@ -2,9 +2,10 @@
   <div class="jumbotron">
     <div class="container">
       <h1 class="display-3">Hello, world!</h1>
-      <%= simple_form_for search_path, html: { class: 'form-inline'} do |f| %>
-        <%= f.input :suburb %>
-        <%= f.input :subjects, collection: Subject.all %>
+      <%= simple_form_for :profile, url: search_path, html: { class: 'form-inline'} do |f| %>
+        <%= f.input :postcode, label: false, placeholder: 'Enter postcode', input_html: { required: true } %>
+        <%= f.input :subject, collection: Subject.all, label: false, prompt: 'Choose subject', input_html: { required: true } %>
+        <%= f.input :year_level, collection: YearLevel.all, label:false, prompt: 'Choose year level', input_html: { required: true } %>
         <%= f.submit 'Search', class: 'btn btn-primary' %>
       <% end %>
     </div>

@@ -2,6 +2,14 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
+  def search
+    @profile_search = params[:profile]
+    # puts profile_search
+    @subject = Subject.find(@profile_search['subject'])
+    @year_level = YearLevel.find(@profile_search['year_level'])
+    @tutors = @subject.profiles.near(@profile_search['postcode'] + ', Australia', 20, :units => :km) & @year_level.profiles.near(@profile_search['postcode'] + ', Australia', 20, :units => :km)
+
+  end
   # GET /profiles
   # GET /profiles.json
   def index
@@ -17,6 +25,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1.json
   def show
     @subjects = Subject.order(:name)
+    @year_levels = YearLevel.all
   end
 
   # GET /profiles/new

@@ -1,6 +1,15 @@
 class YearLevelsController < ApplicationController
-  before_action :set_year_level, only: [:show, :edit, :update, :destroy]
+  before_action :set_year_level, only: [:show, :edit, :update, :destroy, :add, :remove]
 
+  def add
+    current_user.profile.year_levels << @year_level
+    redirect_to :back
+  end
+
+  def remove
+    current_user.profile.year_levels.delete(@year_level)
+    redirect_to :back
+  end
   # GET /year_levels
   # GET /year_levels.json
   def index

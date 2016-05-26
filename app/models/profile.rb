@@ -14,6 +14,10 @@ class Profile < ActiveRecord::Base
     [street, suburb, state, postcode, country].compact.join(', ')
   end
 
+  def full_name
+    [first_name, last_name].join(' ')
+  end
+
   def add_tutor_role
     self.user.add_role :tutor
   end

@@ -74,10 +74,20 @@
     <div class="card card-block">
       <h4 class="card-title">My Subjects</h4>
       <% @subjects.each do |subject| %>
-        <% if current_user.profile.subjects.include?(subject) %>
-          <%= button_to subject.name, remove_subject_path(subject), method: :delete, class: 'btn btn-success' %>
+        <% if @profile.subjects.include?(subject) %>
+          <%= button_to subject.name, remove_subject_path(subject), method: :delete, class: 'btn btn-success disabled' %>
         <% else %>
           <%= button_to subject.name, add_subject_path(subject), class: 'btn btn-danger' %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="card card-block">
+      <h4 class="card-title">My Year Levels</h4>
+      <% @year_levels.each do |year_level| %>
+        <% if @profile.year_levels.include?(year_level) %>
+          <%= button_to year_level.name, remove_year_level_path(year_level), method: :delete, class: 'btn btn-success' %>
+        <% else %>
+          <%= button_to year_level.name, add_year_level_path(year_level), class: 'btn btn-danger' %>
         <% end %>
       <% end %>
     </div>

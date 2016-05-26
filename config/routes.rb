@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :year_levels
+  resources :year_levels do
+    member do
+      post :add
+      delete :remove
+    end
+  end
   resources :subjects do
     member do
       post :add
