@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
     @subject = Subject.find(@profile_search['subject'])
     @year_level = YearLevel.find(@profile_search['year_level'])
     @postcode = @profile_search['postcode']
-    @tutors = @subject.profiles.near(@postcode + ', Australia', @distance.to_i, :units => :km) & @year_level.profiles
+    @tutors = @subject.profiles.near(@postcode + ', Australia', @distance.to_i, :units => :km) & @year_level.profiles.near(@postcode + ', Australia', @distance.to_i, :units => :km)
   end
   # GET /profiles
   # GET /profiles.json

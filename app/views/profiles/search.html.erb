@@ -5,11 +5,10 @@
       <hr>
       <%= simple_form_for :profile, url: search_path, html: { class: 'form-inline'} do |f| %>
       <h4>Subjects</h4>
-
-      <%= f.input :subject, collection: Subject.all, selected: @subject, label: false, input_html: { required: true } %>
+      <%= f.input :subject, collection: Subject.all, selected: @subject.id, label: false, input_html: { required: true } %>
       <hr>
       <h4>Year levels</h4>
-      <%= f.input :year_level, collection: YearLevel.all, selected: @year_level, label:false, input_html: { required: true } %>
+      <%= f.input :year_level, collection: YearLevel.all, selected: @year_level.id, label:false, input_html: { required: true } %>
       <hr>
       <h4>Distance</h4>
         <%= f.input :postcode, label: false, placeholder: 'Enter postcode', input_html: { required: true, value: @postcode } %>

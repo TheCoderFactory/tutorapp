@@ -3,12 +3,9 @@
   <div class="col-md-4">
     <div class="card card-block">
       <h4 class="card-title">
-  <%= @profile.first_name %></h4>
+  <%= @profile.first_name %> <%= @profile.last_name %> <%= link_to 'Message me', new_message_path(receiver: @profile.user.id), class: 'btn btn-warning' %></h4>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @profile.last_name %>
-</p>
+
 
 <p>
   <strong>Qualification:</strong>

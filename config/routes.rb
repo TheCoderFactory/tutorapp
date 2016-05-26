@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   resources :year_levels do
     member do
       post :add

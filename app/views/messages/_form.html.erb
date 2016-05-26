@@ -1,0 +1,13 @@
+<%= simple_form_for(@message) do |f| %>
+  <%= f.error_notification %>
+  <p>To: <%= User.find(params[:receiver]).profile.full_name %></p>
+  <div class="form-inputs">
+    <%= f.input :receiver_id, input_html: { value: params[:receiver]}, as: :hidden %>
+    <%= f.input :subject %>
+    <%= f.input :message %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
