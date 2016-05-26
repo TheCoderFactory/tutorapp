@@ -4,11 +4,11 @@ class ProfilesController < ApplicationController
 
   def search
     @profile_search = params[:profile]
-    # puts profile_search
+    @distance = @profile_search['distance']
     @subject = Subject.find(@profile_search['subject'])
     @year_level = YearLevel.find(@profile_search['year_level'])
-    @tutors = @subject.profiles.near(@profile_search['postcode'] + ', Australia', 20, :units => :km) & @year_level.profiles.near(@profile_search['postcode'] + ', Australia', 20, :units => :km)
-
+    @postcode = @profile_search['postcode']
+    @tutors = @subject.profiles.near(@postcode + ', Australia', @distance.to_i, :units => :km) & @year_level.profiles
   end
   # GET /profiles
   # GET /profiles.json

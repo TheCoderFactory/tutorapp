@@ -1,54 +1,85 @@
 <% if @tutors.any? %>
-  <% @tutors.each do |tutor| %>
-    <p><%= tutor.full_name %></p>
-  <% end %>
-  <div id="map"></div>
-  <script>
-    function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
-        center: {lat: -33.9, lng: 151.2}
-      });
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Filters</h2>
+      <hr>
+      <%= simple_form_for :profile, url: search_path, html: { class: 'form-inline'} do |f| %>
+      <h4>Subjects</h4>
 
-      setMarkers(map);
-    }
-
-    function setMarkers(map) {
-
-      var image = {
-        url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-        // This marker is 20 pixels wide by 32 pixels high.
-        size: new google.maps.Size(20, 32),
-        // The origin for this image is (0, 0).
-        origin: new google.maps.Point(0, 0),
-        // The anchor for this image is the base of the flagpole at (0, 32).
-        anchor: new google.maps.Point(0, 32)
-      };
-      // Shapes define the clickable region of the icon. The type defines an HTML
-      // <area> element 'poly' which traces out a polygon as a series of X,Y points.
-      // The final coordinate closes the poly by connecting to the first coordinate.
-      var shape = {
-        coords: [1, 1, 1, 20, 18, 20, 18, 1],
-        type: 'poly'
-      };
-      <% @tutors.each do |tutor| %>
-        var marker = new google.maps.Marker({
-          position: {lat: <%= tutor.latitude %>, lng: <%= tutor.longitude %>},
-          map: map,
-          icon: image,
-          shape: shape,
-          title: "<%= tutor.full_name %>"
-        });
+      <%= f.input :subject, collection: Subject.all, selected: @subject, label: false, input_html: { required: true } %>
+      <hr>
+      <h4>Year levels</h4>
+      <%= f.input :year_level, collection: YearLevel.all, selected: @year_level, label:false, input_html: { required: true } %>
+      <hr>
+      <h4>Distance</h4>
+        <%= f.input :postcode, label: false, placeholder: 'Enter postcode', input_html: { required: true, value: @postcode } %>
+        <%= f.input :distance, label: 'km radius:', collection: [2,5,10,15,20], selected: @distance %>
+        <%= f.submit 'Update', class: 'btn btn-info' %>
+      <% end %>
+      <hr>
+      <div class="row">
+        <% @tutors.each do |tutor| %>
+          <div class="col-md-6">
+            <div class="card">
+              <img class="card-img-top" src="<%= tutor.picture %>" alt="<%= tutor.full_name %>" width="100%">
+              <div class="card-block">
+                <h4 class="card-title"><%= tutor.full_name %></h4>
+                <p class="card-text"><%= tutor.bio %></p>
+                <%= link_to 'More info', profile_path(tutor), class: 'btn btn-info' %>
+              </div>
+            </div>
+          </div>
         <% end %>
-      }
-    
-  </script>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div id="map"></div>
+      <script>
+        function initMap() {
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: {lat: -33.9, lng: 151.2}
+          });
 
+          setMarkers(map);
+        }
 
+        function setMarkers(map) {
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAel2sOgAjOR1qEWpL8Qe0eYiP2DYNtyk8&callback=initMap"
-    async defer></script>
+          var image = {
+            url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+            // This marker is 20 pixels wide by 32 pixels high.
+            size: new google.maps.Size(20, 32),
+            // The origin for this image is (0, 0).
+            origin: new google.maps.Point(0, 0),
+            // The anchor for this image is the base of the flagpole at (0, 32).
+            anchor: new google.maps.Point(0, 32)
+          };
+          // Shapes define the clickable region of the icon. The type defines an HTML
+          // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+          // The final coordinate closes the poly by connecting to the first coordinate.
+          var shape = {
+            coords: [1, 1, 1, 20, 18, 20, 18, 1],
+            type: 'poly'
+          };
+          <% @tutors.each do |tutor| %>
+            var marker = new google.maps.Marker({
+              position: {lat: <%= tutor.latitude %>, lng: <%= tutor.longitude %>},
+              map: map,
+              icon: image,
+              shape: shape,
+              title: "<%= tutor.full_name %>"
+            });
+            <% end %>
+          }
 
+      </script>
+
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAel2sOgAjOR1qEWpL8Qe0eYiP2DYNtyk8&callback=initMap"
+        async defer></script>
+
+  </div>
+</div>
 <% else %>
   <p>Sorry, there are no tutors in your area. Try your search again.</p>
 <% end %>

@@ -8,6 +8,8 @@ class Profile < ActiveRecord::Base
   geocoded_by :full_street_address
   after_validation :geocode
 
+  mount_uploader :picture, ProfilePictureUploader
+
   after_create :add_tutor_role
 
   def full_street_address

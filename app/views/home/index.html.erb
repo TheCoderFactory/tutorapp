@@ -6,6 +6,7 @@
         <%= f.input :postcode, label: false, placeholder: 'Enter postcode', input_html: { required: true } %>
         <%= f.input :subject, collection: Subject.all, label: false, prompt: 'Choose subject', input_html: { required: true } %>
         <%= f.input :year_level, collection: YearLevel.all, label:false, prompt: 'Choose year level', input_html: { required: true } %>
+        <%= f.input :distance, label: false, collection: [2,5,10,15,20], prompt: 'Distance (km)' %>
         <%= f.submit 'Search', class: 'btn btn-primary' %>
       <% end %>
     </div>
