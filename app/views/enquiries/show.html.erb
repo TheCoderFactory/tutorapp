@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @enquiry.email %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @enquiry.name %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @enquiry.phone %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @enquiry.body %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @enquiry.user %>
+</p>
+
+<%= link_to 'Edit', edit_enquiry_path(@enquiry) %> |
+<%= link_to 'Back', enquiries_path %>

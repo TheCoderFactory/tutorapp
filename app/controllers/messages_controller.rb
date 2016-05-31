@@ -10,6 +10,7 @@ class MessagesController < ApplicationController
   # GET /messages/1
   # GET /messages/1.json
   def show
+    @message.update_attributes(read: DateTime.now)
   end
 
   # GET /messages/new

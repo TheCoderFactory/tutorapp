@@ -9,6 +9,7 @@
       <th>Subject</th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -18,6 +19,7 @@
         <td><%= User.find(message.sender_id).profile.full_name %></td>
         <td><%= link_to message.subject, message %></td>
         <td><%= time_ago_in_words(message.created_at) %></td>
+        <td><%= link_to 'Reply', new_message_path(receiver: message.sender_id) %></td>
         <td><%= link_to 'Delete', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
 
