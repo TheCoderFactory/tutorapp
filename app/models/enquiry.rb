@@ -1,3 +1,3 @@
 class Enquiry < ActiveRecord::Base
-  belongs_to :user
+  validates :email, :body, :name, presence: true
 end

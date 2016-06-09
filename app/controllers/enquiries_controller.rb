@@ -1,5 +1,6 @@
 class EnquiriesController < ApplicationController
   before_action :set_enquiry, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:show, :new, :create]
 
   # GET /enquiries
   # GET /enquiries.json
@@ -28,6 +29,8 @@ class EnquiriesController < ApplicationController
 
     respond_to do |format|
       if @enquiry.save
+        EnquiryJob.perform_async(@enquiry.id)
+
         format.html { redirect_to @enquiry, notice: 'Enquiry was successfully created.' }
         format.json { render :show, status: :created, location: @enquiry }
       else
