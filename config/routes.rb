@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payments, except: [:edit, :update, :destroy]
   resources :enquiries
   resources :messages
   resources :year_levels do

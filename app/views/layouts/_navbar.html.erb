@@ -11,6 +11,8 @@
         <li class="nav-item"><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
         <li class="nav-item"><%= link_to messages_path, class: 'nav-link' do %>Inbox
         <%= unread_messages(current_user.id) %><% end %></li>
+      <% else %>
+        <li class="nav-item"><%= link_to 'Become a tutor', new_user_session_path, class: 'nav-link' %></li>
       <% end %>
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
